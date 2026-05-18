@@ -6,27 +6,27 @@
   <url><loc>https://uvclean.com.au/book.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://uvclean.com.au/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 
-  <url><loc>https://uvclean.com.au/locations/noosa.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/sunshine-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/maroochydore.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/caloundra.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/brisbane.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/gold-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/locations/australia.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/noosa.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/sunshine-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/maroochydore.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/caloundra.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/brisbane.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/gold-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/australia.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 
-  <url><loc>https://uvclean.com.au/industries/aged-care.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/medical-clinics.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/childcare.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/schools.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/gyms-and-fitness.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/hotels.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/rental-properties.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/restaurants.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/offices.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/veterinary.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/salons-and-beauty.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/coaches-and-buses.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/fleet-vehicles.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/boats-and-marine.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvclean.com.au/industries/caravans-and-rvs.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/aged-care.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/medical-clinics.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/childcare.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/schools.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/gyms-and-fitness.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/hotels.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/rental-properties.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/restaurants.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/offices.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/veterinary.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/salons-and-beauty.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/coaches-and-buses.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/fleet-vehicles.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/boats-and-marine.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/caravans-and-rvs.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
 </urlset>

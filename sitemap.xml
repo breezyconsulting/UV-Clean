@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://uvclean.com.au/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://uvclean.com.au/about.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/book.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/machines.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/noosa.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/sunshine-coast.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/maroochydore.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/caloundra.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/brisbane.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/gold-coast.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvclean.com.au/locations/australia.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+</urlset>

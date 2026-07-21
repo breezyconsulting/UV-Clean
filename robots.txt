@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://uvclean.com.au/sitemap.xml

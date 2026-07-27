@@ -2,49 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Main pages -->
   <url><loc>https://uvsterile.com.au/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/about.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/machines.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/book.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/machines</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/book</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/contact</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 
   <!-- Locations -->
-  <url><loc>https://uvsterile.com.au/noosa.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/sunshine-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/maroochydore.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/caloundra.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/brisbane.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/gold-coast.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/australia.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/noosa</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/sunshine-coast</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/maroochydore</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/caloundra</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/brisbane</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/gold-coast</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/australia</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 
   <!-- Services -->
-  <url><loc>https://uvsterile.com.au/mould-treatment.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/water-damage.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/hvac-air-conditioning.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/odour-elimination.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/post-illness.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/post-tenant.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/mould-treatment</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/water-damage</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/hvac-air-conditioning</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/odour-elimination</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/post-illness</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/post-tenant</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
 
   <!-- Industries -->
-  <url><loc>https://uvsterile.com.au/aged-care.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/medical-clinics.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/childcare.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/schools.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/gyms-and-fitness.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/hotels.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/bed-and-breakfasts.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/rental-properties.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/restaurants.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/offices.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/real-estate.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/cleaning-companies.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/veterinary.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/salons-and-beauty.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/coaches-and-buses.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/fleet-vehicles.html</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/boats-and-marine.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/caravans-and-rvs.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/sports-clubs.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/cinemas-and-venues.html</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/funeral-homes.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://uvsterile.com.au/places-of-worship.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/aged-care</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/medical-clinics</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/childcare</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/schools</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/gyms-and-fitness</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/hotels</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/bed-and-breakfasts</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/rental-properties</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/restaurants</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/offices</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/real-estate</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/cleaning-companies</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/veterinary</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/salons-and-beauty</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/coaches-and-buses</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/fleet-vehicles</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/boats-and-marine</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/caravans-and-rvs</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/sports-clubs</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/cinemas-and-venues</loc><priority>0.75</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/funeral-homes</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/places-of-worship</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

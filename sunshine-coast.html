@@ -725,9 +725,13 @@ details[open] .faq-q .icon {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1.4fr 1fr 1fr 1.15fr 1.15fr 1fr;
+  gap: 2rem;
   padding-bottom: var(--space-6);
+}
+
+.footer-brand-col p {
+  max-width: 34ch;
 }
 
 .footer h5 {
@@ -771,13 +775,20 @@ details[open] .faq-q .icon {
   color: rgba(245, 242, 235, 0.45);
 }
 
-@media (max-width: 1100px) {
-  .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
-  .footer-top > div:first-child { grid-column: 1 / -1; max-width: 56ch; }
+@media (max-width: 1300px) {
+  .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 2rem; }
+  .footer-top > div:nth-child(5) { grid-column: 2 / span 2; }
+  .footer-top > div:nth-child(6) { grid-column: 4 / span 2; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .footer-top { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  .footer-top > .footer-brand-col { grid-column: 1 / -1; max-width: 56ch; }
+  .footer-top > div:nth-child(5) { grid-column: auto; }
+  .footer-top > div:nth-child(6) { grid-column: auto; }
+}
+@media (max-width: 800px) {
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .footer-top > div:first-child { grid-column: 1 / -1; }
+  .footer-top > .footer-brand-col { grid-column: 1 / -1; }
 }
 @media (max-width: 500px) {
   .footer-top { grid-template-columns: 1fr; }
@@ -1180,6 +1191,98 @@ details[open] .faq-q .icon {
   line-height: 1.6;
 }
 
+/* ===== Form status states ===== */
+.form-status {
+  margin-top: 1.5rem;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  min-height: 0;
+}
+.form-status:empty {
+  padding: 0;
+  border: none;
+}
+.form-status.is-loading {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.form-status.is-success {
+  padding: 2rem 1.8rem;
+  border: 1px solid var(--uv);
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+}
+.form-status.is-success::before {
+  content: "✓";
+  position: absolute;
+  top: 1.6rem;
+  right: 1.8rem;
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--uv);
+  font-weight: 500;
+}
+.form-status.is-success strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-bottom: 0.6rem;
+  padding-right: 3rem;
+}
+.form-status.is-success p {
+  color: var(--muted);
+  margin: 0;
+}
+.form-status.is-success a {
+  color: var(--uv);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.form-status.is-error {
+  padding: 1.4rem 1.6rem;
+  border: 1px solid #B03030;
+  background: rgba(176, 48, 48, 0.05);
+  color: var(--ink);
+}
+.form-status.is-error strong {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #B03030;
+}
+.form-status.is-error p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+.form-status.is-error a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Honeypot: absolutely hidden from users and screen readers */
+input[name="_honey"] {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 </style>
 
   <script type="application/ld+json">
@@ -1358,9 +1461,9 @@ details[open] .faq-q .icon {
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
-        <div>
+        <div class="footer-brand-col">
           <div class="footer-brand">UV <span class="accent">Sterile</span></div>
-          <p>Hospital-grade UV-C sanitisation for the spaces that matter most. Based in Noosa Heads, working across Australia.</p>
+          <p>Hospital-grade UV-C sanitisation for the spaces that matter most. Chemical-free, residue-free, documented. Based in Noosa Heads, working across Australia.</p>
         </div>
 
         <div>
@@ -1373,6 +1476,16 @@ details[open] .faq-q .icon {
         </div>
 
         <div>
+          <h5>Services</h5>
+          <a href="mould-treatment.html">Mould Treatment</a>
+          <a href="water-damage.html">Water Damage & Flood</a>
+          <a href="hvac-air-conditioning.html">HVAC & Air Con</a>
+          <a href="odour-elimination.html">Odour Elimination</a>
+          <a href="post-illness.html">Post-Illness Home</a>
+          <a href="post-tenant.html">End of Lease</a>
+        </div>
+
+        <div>
           <h5>Industries</h5>
           <a href="aged-care.html">Aged Care</a>
           <a href="medical-clinics.html">Medical & Dental</a>
@@ -1380,25 +1493,34 @@ details[open] .faq-q .icon {
           <a href="schools.html">Schools</a>
           <a href="gyms-and-fitness.html">Gyms & Fitness</a>
           <a href="hotels.html">Hotels</a>
+          <a href="bed-and-breakfasts.html">B&Bs</a>
           <a href="rental-properties.html">Rental Properties</a>
           <a href="restaurants.html">Restaurants</a>
+          <a href="veterinary.html">Veterinary</a>
+          <a href="salons-and-beauty.html">Salons & Beauty</a>
         </div>
 
         <div>
           <h5>More Industries</h5>
           <a href="offices.html">Offices</a>
-          <a href="veterinary.html">Veterinary</a>
-          <a href="salons-and-beauty.html">Salons & Beauty</a>
+          <a href="real-estate.html">Real Estate</a>
+          <a href="cleaning-companies.html">Cleaning Contractors</a>
           <a href="coaches-and-buses.html">Coaches & Buses</a>
           <a href="fleet-vehicles.html">Vehicle Fleets</a>
           <a href="boats-and-marine.html">Boats & Marine</a>
           <a href="caravans-and-rvs.html">Caravans & RVs</a>
+          <a href="sports-clubs.html">Sports Clubs</a>
+          <a href="cinemas-and-venues.html">Cinemas & Venues</a>
+          <a href="funeral-homes.html">Funeral Homes</a>
+          <a href="places-of-worship.html">Places of Worship</a>
         </div>
 
         <div class="footer-contact">
           <h5>Service Areas</h5>
           <a href="noosa.html">Noosa Heads</a>
           <a href="sunshine-coast.html">Sunshine Coast</a>
+          <a href="maroochydore.html">Maroochydore</a>
+          <a href="caloundra.html">Caloundra</a>
           <a href="brisbane.html">Brisbane</a>
           <a href="gold-coast.html">Gold Coast</a>
           <a href="australia.html">Australia-wide</a>
@@ -1416,61 +1538,121 @@ details[open] .faq-q .icon {
 
   <a href="book.html" class="floating-book">Book ↗</a>
   <script>
-// UV Sterile — interactions
-(function () {
-  'use strict';
+// UV Sterile Australia — site interactions
 
-  // Mobile nav toggle
-  const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
-      const open = links.classList.contains('open');
-      toggle.setAttribute('aria-expanded', String(open));
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
-    });
-  }
-
-  // Reveal on scroll
-  const els = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && els.length) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-    els.forEach(el => io.observe(el));
-  } else {
-    els.forEach(el => el.classList.add('visible'));
-  }
-
-  // Year in footer
-  const yearEl = document.querySelector('[data-year]');
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-  // Simple form handler (mailto fallback)
-  document.querySelectorAll('form[data-mailto]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const subject = encodeURIComponent(form.dataset.subject || 'UV Sterile Enquiry');
-      const lines = [];
-      fd.forEach((v, k) => { lines.push(`${k}: ${v}`); });
-      const body = encodeURIComponent(lines.join('
-'));
-      window.location.href = `mailto:${form.dataset.mailto}?subject=${subject}&body=${body}`;
-    });
+// ===== Nav toggle (mobile) =====
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
-})();
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }));
+}
+
+// ===== Year stamp in footer =====
+document.querySelectorAll('[data-year]').forEach(el => {
+  el.textContent = new Date().getFullYear();
+});
+
+// ===== Form handler =====
+// Submits to FormSubmit.co AJAX endpoint. Shows in-page confirmation on success,
+// and a graceful error with fallback contact details on failure.
+// NOTE: The FIRST submission after deployment sends an activation email to the
+// recipient — the recipient must click the confirmation link before the endpoint
+// starts forwarding real submissions.
+document.querySelectorAll('form.uv-form').forEach(form => {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const endpoint = form.dataset.endpoint;
+    const status = form.querySelector('.form-status');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.textContent : '';
+
+    // Honeypot: if a bot filled the hidden field, silently discard
+    const honey = form.querySelector('input[name="_honey"]');
+    if (honey && honey.value) {
+      return;
+    }
+
+    // Basic required-field check (browser normally handles this, but preventDefault bypasses)
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // Collect fields as JSON
+    const data = Object.fromEntries(new FormData(form).entries());
+    // Special FormSubmit hidden fields
+    if (form.dataset.subject) data._subject = form.dataset.subject;
+    data._captcha = 'false';
+    data._template = 'table';
+    // Remove honeypot from payload
+    delete data._honey;
+
+    // Loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+    }
+    if (status) {
+      status.className = 'form-status is-loading';
+      status.textContent = 'Sending your message…';
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      let payload = {};
+      try { payload = await response.json(); } catch (_) { /* non-JSON response */ }
+
+      const ok = response.ok && (payload.success === 'true' || payload.success === true);
+
+      if (ok) {
+        // Success — hide the form controls, show confirmation
+        form.querySelectorAll('input, textarea, select, button, label, .form-row, .form-grid').forEach(el => {
+          el.style.display = 'none';
+        });
+        if (status) {
+          status.className = 'form-status is-success';
+          status.innerHTML =
+            '<strong>Thanks — your message is on its way.</strong>' +
+            '<p>We\'ll respond within one business day. For urgent enquiries, call ' +
+            '<a href="tel:+61417631743">0417 631 743</a>.</p>';
+        }
+      } else {
+        throw new Error(payload.message || 'Submission failed');
+      }
+    } catch (err) {
+      if (status) {
+        status.className = 'form-status is-error';
+        status.innerHTML =
+          '<strong>Something went wrong.</strong>' +
+          '<p>Please try again, or email us directly at ' +
+          '<a href="mailto:uvsterileaustralia@gmail.com">uvsterileaustralia@gmail.com</a> ' +
+          'or call <a href="tel:+61417631743">0417 631 743</a>.</p>';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    }
+  });
+});
 
 </script>
 </body>

@@ -706,9 +706,13 @@ details[open] .faq-q .icon {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1.4fr 1fr 1fr 1.15fr 1.15fr 1fr;
+  gap: 2rem;
   padding-bottom: var(--space-6);
+}
+
+.footer-brand-col p {
+  max-width: 34ch;
 }
 
 .footer h5 {
@@ -752,13 +756,20 @@ details[open] .faq-q .icon {
   color: rgba(245, 242, 235, 0.45);
 }
 
-@media (max-width: 1100px) {
-  .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
-  .footer-top > div:first-child { grid-column: 1 / -1; max-width: 56ch; }
+@media (max-width: 1300px) {
+  .footer-top { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 2rem; }
+  .footer-top > div:nth-child(5) { grid-column: 2 / span 2; }
+  .footer-top > div:nth-child(6) { grid-column: 4 / span 2; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .footer-top { grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+  .footer-top > .footer-brand-col { grid-column: 1 / -1; max-width: 56ch; }
+  .footer-top > div:nth-child(5) { grid-column: auto; }
+  .footer-top > div:nth-child(6) { grid-column: auto; }
+}
+@media (max-width: 800px) {
   .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .footer-top > div:first-child { grid-column: 1 / -1; }
+  .footer-top > .footer-brand-col { grid-column: 1 / -1; }
 }
 @media (max-width: 500px) {
   .footer-top { grid-template-columns: 1fr; }
@@ -1159,4 +1170,96 @@ details[open] .faq-q .icon {
   color: var(--muted);
   max-width: 70ch;
   line-height: 1.6;
+}
+
+/* ===== Form status states ===== */
+.form-status {
+  margin-top: 1.5rem;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  min-height: 0;
+}
+.form-status:empty {
+  padding: 0;
+  border: none;
+}
+.form-status.is-loading {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.form-status.is-success {
+  padding: 2rem 1.8rem;
+  border: 1px solid var(--uv);
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+}
+.form-status.is-success::before {
+  content: "✓";
+  position: absolute;
+  top: 1.6rem;
+  right: 1.8rem;
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--uv);
+  font-weight: 500;
+}
+.form-status.is-success strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-bottom: 0.6rem;
+  padding-right: 3rem;
+}
+.form-status.is-success p {
+  color: var(--muted);
+  margin: 0;
+}
+.form-status.is-success a {
+  color: var(--uv);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.form-status.is-error {
+  padding: 1.4rem 1.6rem;
+  border: 1px solid #B03030;
+  background: rgba(176, 48, 48, 0.05);
+  color: var(--ink);
+}
+.form-status.is-error strong {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #B03030;
+}
+.form-status.is-error p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+}
+.form-status.is-error a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Honeypot: absolutely hidden from users and screen readers */
+input[name="_honey"] {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

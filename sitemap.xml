@@ -4,6 +4,7 @@
   <url><loc>https://uvsterile.com.au/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
   <url><loc>https://uvsterile.com.au/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://uvsterile.com.au/machines</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://uvsterile.com.au/reseller</loc><priority>0.85</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://uvsterile.com.au/book</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://uvsterile.com.au/contact</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
 

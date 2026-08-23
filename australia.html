@@ -1195,6 +1195,11 @@ details[open] .faq-q .icon {
   max-width: 70ch;
   line-height: 1.6;
 }
+.faq details p a {
+  color: var(--uv);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 /* ===== Form status states ===== */
 .form-status {
@@ -1310,6 +1315,18 @@ input[name="_honey"] {
       "name": "Australia-Wide"
     },
     "url": "https://uvsterile.com.au/australia"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {"@type":"Question","name":"Do you travel interstate, or do you supply units instead?","acceptedAnswer":{"@type":"Answer","text":"Both, depending on the geography. For concentrated work we mobilise a treatment team and travel. For sites spread across states, it's usually cheaper to supply Sterile-Bright™ units to each site with operator training included. We'll tell you which one suits your footprint. See buying a unit."}},
+        {"@type":"Question","name":"Can our own staff run the unit, or does it need a technician?","acceptedAnswer":{"@type":"Answer","text":"Your staff can run it. A unit purchase includes a training session covering safe operation, key fob use and dwell times by environment. No licence or apprenticeship is involved — the operator sets up, evacuates the space and starts the cycle remotely."}},
+        {"@type":"Question","name":"How do you keep the standard consistent across sites in different states?","acceptedAnswer":{"@type":"Answer","text":"Same unit, same procedure, same documentation everywhere: setup, evacuate, run the cycle remotely, hand back a re-occupiable space with a treatment record. A vehicle interior is under a minute and a room is 12–15 minutes regardless of which site it's in."}},
+        {"@type":"Question","name":"We're nowhere near the Sunshine Coast. Is there a local operator option?","acceptedAnswer":{"@type":"Answer","text":"There can be. Operators buy a unit outright and run treatments in their own region, with territory exclusivity available on request and no franchise fees or royalties. If your area has no coverage, that's often the fastest way to get it. See the reseller program."}}
+    ]
   }
   </script>
   <script>document.documentElement.classList.add("js");</script>
@@ -1445,6 +1462,33 @@ input[name="_honey"] {
           <h4>Hand Back</h4>
           <p>Space is immediately re-occupiable. Treatment record provided.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container reveal">
+      <div class="section-head">
+        <div class="label-col"><span class="eyebrow">/ Frequently Asked · Australia-Wide</span></div>
+        <div><h2>Questions, answered.</h2></div>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Do you travel interstate, or do you supply units instead?</summary>
+          <p>Both, depending on the geography. For concentrated work we mobilise a treatment team and travel. For sites spread across states, it's usually cheaper to supply Sterile-Bright™ units to each site with operator training included. We'll tell you which one suits your footprint. See <a href="machines">buying a unit</a>.</p>
+        </details>
+        <details>
+          <summary>Can our own staff run the unit, or does it need a technician?</summary>
+          <p>Your staff can run it. A unit purchase includes a training session covering safe operation, key fob use and dwell times by environment. No licence or apprenticeship is involved — the operator sets up, evacuates the space and starts the cycle remotely.</p>
+        </details>
+        <details>
+          <summary>How do you keep the standard consistent across sites in different states?</summary>
+          <p>Same unit, same procedure, same documentation everywhere: setup, evacuate, run the cycle remotely, hand back a re-occupiable space with a treatment record. A vehicle interior is under a minute and a room is 12–15 minutes regardless of which site it's in.</p>
+        </details>
+        <details>
+          <summary>We're nowhere near the Sunshine Coast. Is there a local operator option?</summary>
+          <p>There can be. Operators buy a unit outright and run treatments in their own region, with territory exclusivity available on request and no franchise fees or royalties. If your area has no coverage, that's often the fastest way to get it. See the <a href="reseller">reseller program</a>.</p>
+        </details>
       </div>
     </div>
   </section>

@@ -4,6 +4,69 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-08-23 — Run 2
+
+### Researched
+
+- **Keyword clusters sampled this run:** fleet vehicle sanitisation Brisbane, end-of-lease / bond-clean sanitisation Sunshine Coast, "UV sanitisation" Maroochydore and Caloundra, become a UV cleaning reseller Australia, plus the UV-C-and-mould "people also ask" cluster (does UV kill mould, how long does it take) and a branded check on `uvsterile.com.au`.
+- **Checked over runs 1–2:** Noosa Heads, mould Noosa/Sunshine Coast, aged care Sunshine Coast, UV-C efficacy PAA (run 1); the five above (run 2).
+- **Still to rotate through:** UV disinfection Gold Coast hotels, childcare and school UV disinfection QLD, HVAC UV sanitisation Brisbane, odour removal and post-flood clusters, aged care Gold Coast, veterinary and salon clusters.
+
+### Found
+
+- **Both run 1 blockers still hold, unchanged.** The search tool is US-geolocated, so it does not reproduce an Australian searcher's local results, and `https://uvsterile.com.au` is still blocked by this environment's egress proxy (403 at the CONNECT tunnel) — no live rendering, headers, indexing status or Core Web Vitals this run either. Findings below are verified against repository source, which is what deploys. Ranking positions remain unmeasured, not measured-as-zero.
+- **Nothing in the sampled clusters justified a new page.** The Brisbane fleet cluster is held by general commercial cleaners and detailers, not UV specialists; `fleet-vehicles` and `brisbane` already address it. The Sunshine Coast bond-clean cluster is crowded and price-led, and no ranking provider mentions UV at all — but that is a differentiator for the existing `post-tenant` page, not a reason to build another one.
+- **Competitor observations:**
+  - *Clean-Air Australia* runs Sunshine Coast HVAC-hygiene location pages and leads with NATA-accredited IAQ testing and ISO-certified UVC. Direct overlap with `hvac-air-conditioning`, and they compete on third-party certification rather than on service. Recorded as an observation — see "Needs owner input".
+  - *Zoom Office Cleaning* (Brisbane) lists UV-C as one of five sanitisation methods alongside chemical, steam, electrostatic and ozone. A generalist bundling UV, not a specialist.
+  - A Brisbane operator trades under the name *UV-Clean* (Level 1/241 Adelaide St). Name-adjacent in the same vertical; worth the owner knowing it exists.
+  - Bond cleaners across the Coast are a plausible partner channel rather than a competitor — the same argument `cleaning-companies` already makes.
+
+#### Technical problems found in the repo
+
+1. **Every location page's `LocalBusiness` schema pointed its `url` at a page that does not exist.** All seven declared `https://uvsterile.com.au/locations/<slug>.html` — a `/locations/` directory the site has never had, plus a `.html` extension `cleanUrls` strips. Seven 404s, none matching the page's own canonical.
+2. **Eight pages declared a schema `image` of `/assets/logo.svg`** — there is no `/assets/` directory either. Google cannot fetch an image that 404s, and SVG is not among the formats it accepts for structured-data images regardless.
+3. `mould-treatment` had no answer to "how long does it take", which the PAA research put among the most-asked questions in that cluster.
+
+### Changed
+
+Four commits, in priority order (fix broken → improve weak):
+
+1. **`Point LocalBusiness schema url and image at real URLs`** — repointed the seven `url` values to their extensionless canonical and the eight `image` values to `/images/sterile-bright-unit.png`, a real PNG already serving as the sitewide `og:image`. No visible copy changed.
+2. **`Add FAQ sections and FAQPage schema to remaining three location pages`** — finishes the location set begun last run. `maroochydore`, `caloundra` and `australia` each get four questions written to their actual audience rather than a shared template: after-hours office cycles, fleet turnaround and the hospital precinct for Maroochydore; holiday-let changeovers, aged-care scheduling and residential whole-home for Caloundra; travel-versus-unit-supply, operator training and reseller territories for the national page. Every factual claim traced to copy already live elsewhere. Adds 9 contextual internal links and the `.faq details p a` rule the other location pages already carry.
+3. **`Trim titles and meta descriptions on eight highest-value pages`** — first tranche of the paced metadata job. `index`, `machines`, `reseller`, `noosa`, `sunshine-coast`, `brisbane`, `gold-coast` and the `mould-treatment` description. All eight titles now fit under 60 characters and all descriptions under 155, so neither gets truncated. Titles lead with the query rather than the brand. `og:title`, `og:description` and the `LocalBusiness` schema `description` were updated in step, so no page describes itself two different ways.
+4. **`Answer 'how long does UV-C mould treatment take'`** — one new FAQ plus schema entry on `mould-treatment`, built from the 12–15 minute room figure and the focal-zone dwell language already stated elsewhere on the site.
+
+**Why 12 pages and not more:** the metadata job still has ~25 pages to go. Rewriting all of them in one week alongside a schema change reads as churn. Next tranche next run.
+
+### QA performed
+
+A reusable harness now checks, on all 41 pages: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, open/close balance on 17 tag types, every JSON-LD block parsing as valid JSON, every FAQPage question list matching the page's visible `<summary>` text in order, every schema `url`/`image` resolving to a real route or file, every internal href resolving extensionless with zero `.html`, no `.html` in any canonical or `og:url`, `alt` on every `<img>`, ABN / phone / email present, FormSubmit endpoint and honeypot intact on the four pages that have forms, no duplicate titles or descriptions, and sitemap coverage in both directions.
+
+All 41 pages pass with zero failures. 80 JSON-LD blocks now parse (was 77 — three new FAQPage blocks). ABN 78 059 411 175, phone, email, FormSubmit endpoints and honeypot fields verified unchanged. `vercel.json`, `main.js` and `styles.css` untouched.
+
+### Deliberately NOT done
+
+- **No new page created.** See above — neither sampled cluster produced a distinct, unaddressed opportunity.
+- **`sitemap.xml` untouched** — no pages added or removed.
+- **No `BreadcrumbList` schema and no `GeoCoordinates` on location pages.** Still genuine wins, still deferred: this run already changed 12 pages, and both are sitewide sweeps better done on their own. Carried to next run.
+- **No mould-specific dwell-time figure invented.** The new mould FAQ uses the room figure the site already states and explains the mechanism; it does not assert a kill time for mould that the business has not published.
+
+### Needs owner input
+
+Run 1's six items all still stand — **GSC access, live-site confirmation, published reviews with attribution, a Google Business Profile, visible starting prices, and a satisfaction guarantee.** No action taken on any of them. Repeated here rather than restated at length; see run 1 for the reasoning. One addition:
+
+7. **Third-party certification or accreditation, if any exists.** The HVAC competitor found this run leads with NATA-accredited testing and ISO-certified UVC, and competes on that rather than on service. If UV Sterile holds any certification, accreditation, insurance class or equipment standard that can be named, it belongs on the site — but the agent cannot assert one it has not been given. Related: the site's existing "full public liability cover, certificates of currency on request" line is a trust asset currently buried in one FAQ answer.
+
+### Suggested next run
+
+1. Second metadata tranche, 6–8 pages: `book`, `contact`, `about`, `aged-care`, `post-tenant`, `hvac-air-conditioning`, `rental-properties`, `fleet-vehicles`.
+2. `BreadcrumbList` schema sitewide, or `GeoCoordinates` on the six QLD location pages — one, not both.
+3. Rotate keyword checks to the untouched clusters listed above.
+4. Consider whether `post-tenant` should target the bond-clean vocabulary more directly, given no ranking bond cleaner mentions UV.
+
+---
+
 ## 2026-08-16 — Run 1 (first run)
 
 ### Researched

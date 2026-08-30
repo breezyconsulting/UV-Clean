@@ -4,6 +4,74 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-08-30 — Run 3
+
+### Researched
+
+- **Keyword clusters sampled this run:** UV disinfection for Gold Coast hotels, HVAC/air-conditioning UV sanitisation Brisbane, childcare and early-learning disinfection QLD, aged care infection control Gold Coast, post-flood and water-damage odour QLD, plus two "people also ask" clusters — "does UV in air conditioning actually work / is it worth it" and "why does it still smell musty after water damage".
+- **Checked over runs 1–3:** Noosa Heads, mould Noosa/Sunshine Coast, aged care Sunshine Coast, UV-C efficacy PAA (run 1); fleet Brisbane, end-of-lease Sunshine Coast, Maroochydore, Caloundra, reseller Australia, mould-duration PAA, branded (run 2); the seven above (run 3).
+- **Still to rotate through:** veterinary and salon/beauty clusters, gyms and fitness, restaurants and hospitality, schools as its own cluster, real estate and property sales, offices Brisbane, boats/marine and caravans/RV, and purchase-intent terms for the unit itself ("buy UV sanitising unit Australia", "commercial UV disinfection machine price").
+
+### Found
+
+- **Both standing blockers still hold, for the third run.** The search tool is US-geolocated and does not reproduce an Australian searcher's local results, and `https://uvsterile.com.au` is still refused by this environment's egress proxy (`EGRESS_BLOCKED`). No live rendering, response headers, indexing status or Core Web Vitals again this run. Everything below is verified against repository source, which is what deploys. Ranking positions remain **unmeasured**, not measured-as-zero.
+- **The central competitive finding is now consistent across three runs and eleven clusters: nobody ranking is a UV specialist.** Gold Coast hotels, Brisbane HVAC, QLD childcare and Gold Coast aged care are all held by generalist commercial cleaners and pest/hygiene contractors competing on chemical disinfection, certification and years-in-business. Not one of the ranking service providers in this run's samples mentions UV-C at all. The exception is the equipment vendors (Steril-Aire AU, Australian Ultra Violet, Alfaa, Honeywell), who sell installed hardware, not booked treatments — the same split run 1 identified. The positioning is genuinely unoccupied; the deficit is visibility, not proposition.
+- **Nothing in the sampled clusters justified a new page.** Every cluster maps onto a page that already exists (`hotels` + `gold-coast`, `hvac-air-conditioning` + `brisbane`, `childcare`, `aged-care` + `gold-coast`, `water-damage` + `odour-elimination`). Building suburb- or pairing-level pages on top of these would split relevance across near-duplicates rather than add coverage.
+- **Competitor observations:**
+  - *Steril-Aire Australia* competes on named mechanism — 253.7 nm output, biofilm on coils and drain pans, and a quantified efficiency claim (a 0.05 mm biofilm costing 37% of thermal efficiency). The `hvac-air-conditioning` page argues hygiene only; the operating-cost argument is the one a facilities manager buys on, and the site does not make it.
+  - Childcare and aged-care contractors in QLD lead with regulatory language — NQF/National Quality Framework alignment, infection-control training records, triple certification. Trust signals, not technology claims. Same certification theme flagged in run 2.
+  - US HVAC coverage of "UV light worth it" is dominated by *installed-lamp* pricing and bulb-replacement costs. The `hvac-air-conditioning` page's existing FAQ separating periodic service treatment from installed in-duct lamps is well-aimed at that confusion and is worth keeping prominent.
+
+#### Technical problems found in the repo
+
+1. **The homepage had six visible FAQs and no `FAQPage` markup** — the only page on the site with FAQ content and no schema for it, and the highest-value page on the site. Run 1's sweep fixed 31 FAQ blocks and added one to `contact`; `index` was missed because its FAQ markup uses the `.faq-grid`/`.faq-item` component rather than the `.faq`/`<details>` pattern the other 40 pages use.
+2. **All six Queensland location pages under-declared their coverage.** Each `LocalBusiness` block named a single `areaServed` — the one region in the page title — while the page's own visible "Areas Covered" section listed eight to eleven suburbs the markup never mentioned. None of the six carried `GeoCoordinates` either, though `index` has declared them since before run 1.
+3. **A factual conflict between two owner-authored pages, still unresolved (see "Needs owner input").** `index` states a standard office or hotel room takes **3–8 minutes**; `bed-and-breakfasts` states **12-15 minutes per room**. Both predate this agent. Runs 1–2 propagated the 12–15 figure to five further pages without noticing the homepage said something different — that amplification is this agent's, and it is recorded here rather than quietly reconciled.
+4. `water-damage` had no answer to "why does it still smell after it's dried", which the PAA research put at the centre of that cluster.
+
+### Changed
+
+Four commits, in priority order (fix broken → improve weak):
+
+1. **`Add missing FAQPage schema to the homepage`** — six Q&As, extracted programmatically from the visible copy so schema and on-page text match exactly, as Google requires. No visible copy changed. Site total: 81 JSON-LD blocks, all parsing.
+2. **`Trim titles and meta descriptions on eight more pages`** — second tranche of the paced metadata job: `about`, `contact`, `aged-care`, `post-tenant`, `hvac-air-conditioning`, `rental-properties`, `fleet-vehicles`, `water-damage`. All eight titles now under 60 characters and all descriptions under 155. `og:title` and `og:description` updated in step — `about` was the worst case, carrying an `og:description` that shared no wording at all with its meta description. `post-tenant` now leads on "bond cleans" rather than "end-of-lease", acting on run 2's finding that it is the term Australian searchers use and that no ranking bond cleaner pairs it with UV.
+3. **`Add geo coordinates and full suburb coverage to location page schema`** — `areaServed` on each of the six QLD location pages rebuilt from that page's own visible suburb list (56 Places total), plus the Noosa Heads `GeoCoordinates` already declared on `index`, which match the `PostalAddress` stated alongside them on every one of those pages. No suburb was added that the page did not already name, and no visible copy changed.
+4. **`Answer the lingering musty-smell question on the water damage page`** — one new FAQ plus schema entry, built from the mechanism the `odour-elimination` page already sets out (musty smell is microbial, not moisture) and keeping the line-of-sight caveat `mould-treatment` states, so it does not promise what UV-C cannot reach. Two contextual internal links, plus the `.faq details p a` rule the location pages already carry.
+
+**Why 15 pages and not more:** the metadata job still has roughly 23 pages to go. Same reasoning as run 2 — pacing it beats a single sweep that reads as churn.
+
+### QA performed
+
+The run-2 harness, extended, run against all 41 pages: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, open/close balance on 19 tag types, every JSON-LD block parsing as valid JSON, every FAQPage question list matching the page's visible `<summary>` text in order, every schema `url`/`image` resolving to a real route or file, canonical and `og:url` matching the page's own extensionless route, the full og/twitter tag set present, every internal href resolving with zero `.html`, `alt` on every `<img>`, ABN / phone / email present, FormSubmit endpoint and honeypot intact on every page with a form, no duplicate titles or descriptions, and sitemap coverage in both directions.
+
+All 41 pages pass with zero failures. 81 JSON-LD blocks parse (was 80 — one new FAQPage on `index`). Two harness bugs found and fixed while building it: `<head` was substring-matching `<header`, and title lengths were being measured on the raw source rather than the unescaped text. ABN 78 059 411 175, phone, email, FormSubmit endpoints and honeypot fields verified unchanged on all 41 pages. `vercel.json`, `main.js` and `styles.css` untouched.
+
+Remaining metadata over-length, as warnings rather than failures: **23 titles over 60 characters, 17 descriptions over 155.** Next tranches, worst first.
+
+### Deliberately NOT done
+
+- **No new page created.** Third run running: every sampled cluster maps to an existing page. See above.
+- **`sitemap.xml` untouched** — no pages added or removed.
+- **No `BreadcrumbList` schema.** Deferred a third time, and this time with a recommendation to drop it: the site is deliberately flat (every page sits at the root, `/noosa` is not under `/locations/`), so a breadcrumb trail would have to be invented rather than described. Google's breadcrumb rich result reflects real hierarchy. Recorded as "not worth doing" rather than "still queued", so run 4 doesn't re-open it.
+- **Did not reconcile the 3–8 vs 12-15 minute room figure.** Both are owner-authored, this agent cannot know which is right, and picking one would be inventing a service fact. Not propagated any further this run either. See below.
+- **Did not add the coil-biofilm efficiency argument to the HVAC page.** The 37%-efficiency-loss figure belongs to a competitor's marketing, and the site has no measurement of its own to cite. Making a quantified energy claim on the strength of someone else's number is not something this agent should do unprompted.
+
+### Needs owner input
+
+Run 1's six items and run 2's seventh all still stand, with **no action taken on any of them** — GSC access, live-site confirmation, published reviews with attribution, a Google Business Profile, visible starting prices, a satisfaction guarantee, and any nameable certification or accreditation. See runs 1–2 for the reasoning. Two additions:
+
+8. **Which room treatment time is correct — 3–8 minutes, or 12–15?** The homepage FAQ says a standard office or hotel room takes 3–8 minutes. The bed-and-breakfasts page says 12-15 minutes per room. Both were written before this agent existed; runs 1–2 then repeated the 12–15 figure on five more pages. They are now both live, in FAQ schema, and a prospective client comparing the homepage against a service page sees the site contradict itself on the single most-asked question about the service. **This is a one-word answer from the owner and the agent will align every page to it next run.** It will not guess.
+9. **Is there an operating-cost argument for the HVAC service?** The strongest competitor in that cluster sells on plant efficiency — biofilm on cooling coils costing thermal performance — rather than on hygiene, and facilities managers buy on running cost. If UV Sterile has ever measured or been told of an efficiency or maintenance-interval benefit on a real job, that is the argument the `hvac-air-conditioning` page is missing. The agent will not borrow a competitor's figure to make it.
+
+### Suggested next run
+
+1. Third metadata tranche, 8 pages, worst first: `sports-clubs` (229-char description), `post-illness` (196), `cleaning-companies` (192), `funeral-homes` (187), `bed-and-breakfasts` (86-char title), `places-of-worship`, `real-estate`, `childcare`.
+2. If the owner has answered item 8, align the room-duration figure sitewide — it touches seven pages and their FAQ schema.
+3. Rotate keyword checks to the untouched clusters listed above, and give the purchase-intent terms for the unit a run of their own — `machines` and `reseller` have had no cluster research at all beyond run 2's single reseller check, and they are the two highest-value pages on the site.
+4. Consider `Service` schema `url` fields: the 33 service and industry pages declare a `Service` with no `url`, so nothing ties the entity to the page describing it.
+
+---
+
 ## 2026-08-23 — Run 2
 
 ### Researched

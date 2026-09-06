@@ -4,6 +4,86 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-09-06 — Run 4
+
+### Researched
+
+- **Keyword cluster sampled this run: purchase intent for the unit itself** — the terms someone uses when they are ready to buy hardware rather than book a treatment. Run 3 flagged that `machines` and `reseller` are the two highest-value pages on the site and had had no cluster research at all. This run gave them one to themselves: "buy commercial UV-C disinfection machine Australia price", "UV disinfection robot / mobile UVC unit for sale Australia commercial", "UV sanitising equipment supplier reseller opportunity Australia", "portable UV-C unit vs autonomous disinfection robot", and a consumables PAA cluster on UV-C lamp life, replacement interval and running cost.
+- **Checked over runs 1–4:** Noosa Heads, mould Noosa/Sunshine Coast, aged care Sunshine Coast, UV-C efficacy PAA (run 1); fleet Brisbane, bond-clean Sunshine Coast, Maroochydore, Caloundra, reseller Australia, mould-duration PAA, branded (run 2); Gold Coast hotels, HVAC Brisbane, childcare QLD, aged care Gold Coast, post-flood odour, two HVAC/odour PAA clusters (run 3); the five purchase-intent clusters above (run 4).
+- **Still to rotate through:** veterinary and salon/beauty, gyms and fitness, restaurants and hospitality, schools as its own cluster, real estate and property sales, offices Brisbane, boats/marine and caravans/RVs, and the three smallest industry pages (funeral homes, places of worship, sports clubs) which have never been sampled.
+
+### Found
+
+- **Both standing blockers still hold, for the fourth run.** The search tool is US-geolocated and does not reproduce an Australian searcher's local results, and `https://uvsterile.com.au` is still refused by this environment's egress proxy (`EGRESS_BLOCKED`). New this run: `medicalsearch.com.au`, the aggregator that ranks hardest in this cluster, is **also** egress-blocked, so its page structure was inferred from search results rather than read. Ranking positions remain **unmeasured**, not measured-as-zero.
+- **No owner commits since run 3**, so the room-duration question (item 8) is still unanswered and nothing was aligned. See below — the inventory has since grown.
+- **The purchase-intent cluster has a different competitive shape from every service cluster sampled so far.** The service clusters are held by generalist cleaners who never mention UV. This one is held by three groups who all know exactly what UV-C is: quote aggregators (MedicalSearch, which runs city-level pages such as "UV Disinfection Robot in Brisbane"), autonomous-robot vendors (UVD Robots/Blue Ocean, OhmniClean/OhmniLabs, MUVi, GERMii, RobotLAB), and equipment vendors (Australian Ultra Violet, Ultra Violet Products, UV Cleantech). What is still absent is anyone selling a **hand-portable, operator-led unit to Australian small and mid-size businesses** — the same unoccupied position runs 1–3 found, confirmed from the hardware side.
+- **The robot vendors argue against portable units directly, and the site had no answer.** Their comparison content characterises handheld UV as labour-intensive, error-prone, dangerous, and requiring the operator to wear a protective suit. That is the single most likely objection in a buyer's head at the point of purchase, and `machines` was silent on it. Its existing comparison section covers only the step up from a 40W fluorescent unit — the low end, not the alternative a buyer is actually weighing. Acted on; see Changed.
+- **Aggregators publish price ranges for this category** ($500–$5,000, ~$2,750 average quoted for disinfection robots). This strengthens owner item 5 rather than resolving it — **no pricing was added to the site.**
+- **The site's 9,000-hour rated bulb life is consistent with the category** (low-pressure UV-C lamps are typically quoted at 8,000–12,000 hours), and `machines` already answers bulb replacement in its FAQ. No change needed — recorded so a future run does not re-open it. Category sources also claim roughly 15% annual output degradation; the site makes no such claim and none was added, since it is someone else's number about generic lamps rather than a measurement of this unit.
+
+#### A hypothesis tested and rejected
+
+Runs 2 and 3 both recorded that competitors in aged care, childcare and HVAC lead with certification and regulatory language, and run 2 raised it as owner item 7. This run checked whether the site's real, already-published equipment standards (IEC 62471, ICNIRP UV-C, WHS Act 2011) were simply buried — they appear in full on only five pages — and planned to surface them on the industry pages.
+
+**That was wrong, and the change was not made.** Thirty pages already render a `standards-strip` section, and on the industry pages it is *tailored to that industry's own regulator* rather than listing equipment standards: `aged-care` cites the Aged Care Quality Standards (Standard 3: Personal and clinical care) and offers treatment logs as accreditation evidence. Bolting a generic equipment-certification list onto those pages would have duplicated and diluted something already better-aimed than the generic version.
+
+The consequence for owner item 7 is that it should be read more narrowly from here: the gap is **third-party accreditation of the business** (the NATA/ISO class of signal a competitor leads with), not equipment standards, which the site already states well.
+
+#### Technical problems found in the repo
+
+1. **All 31 `Service` and `Product` JSON-LD blocks lacked a `url`.** Nothing tied the entity to the page describing it — the gap run 3 flagged for `Service`, and it turned out to cover the two `Product` blocks on `machines` and `reseller` as well.
+2. **Fourteen of those blocks had no `name` at all** — a `Service` entity Google cannot identify. All fourteen are industry pages. The seven industry pages that *do* carry a name set it to exactly their own `audienceType`, so the fix was derivable from the site's own convention rather than invented.
+3. `machines` had no answer to the autonomous-robot comparison (above).
+
+### Changed
+
+Three commits, in priority order (fix broken → improve weak):
+
+1. **`Give every Service and Product entity a name and a canonical url`** — all 31 blocks now carry their page's own extensionless canonical URL, and the 14 missing names are set from that block's existing `audienceType`, matching the convention the seven named industry pages already follow. Additions only: no other schema key changed and no visible copy was touched.
+2. **`Trim titles and meta descriptions on eight more pages`** — third tranche of the paced metadata job: `sports-clubs`, `post-illness`, `cleaning-companies`, `funeral-homes`, `bed-and-breakfasts`, `places-of-worship`, `real-estate`, `childcare`. Worst cases were `sports-clubs` (a 229-character description that listed six sports before saying what the service was) and `bed-and-breakfasts` (an 86-character title that spent two ampersands before reaching the brand). `og:title` and `og:description` updated in step. **Sitewide over-length: 23 titles → 16, 17 descriptions → 9.**
+3. **`Answer the autonomous-robot comparison on the machines page`** — one new FAQ plus schema entry, built entirely from facts already live on that page: the unit hangs from a hook, runs from a wireless key fob with the operator outside the room, and moves between vehicles, rooms and sites in a day. It concedes the case where a robot genuinely suits (one large fixed facility) rather than claiming the unit wins everywhere. No competitor price or specification is cited.
+
+**Why three changes and not more:** the two schema and metadata jobs together touched 38 pages, which is already the run's full change budget for a site this size. The metadata job has roughly 16 pages left; pacing it still beats a sweep.
+
+### QA performed
+
+The run-2/3 harness, rebuilt and re-run against all 41 pages: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, open/close balance on 20 tag types, every JSON-LD block parsing as valid JSON, every FAQPage question list matching the page's visible `<summary>` text in order, every schema `url`/`image` resolving to a real route or file, canonical and `og:url` matching the page's own extensionless route, the full og/twitter tag set, every internal href resolving with zero `.html`, `alt` on every `<img>`, ABN / phone / email present, FormSubmit endpoint and honeypot intact, no duplicate titles or descriptions, and sitemap coverage in both directions.
+
+**All 41 pages pass with zero failures. 81 JSON-LD blocks parse.** One harness bug found and fixed: the FAQ comparison was tripping on `index`, whose `.faq-item` headings carry a trailing `+` toggle glyph the other 40 pages don't have — a harness artefact, not a site fault. ABN 78 059 411 175, phone, email, FormSubmit endpoints and honeypot fields verified unchanged on all 41 pages. `vercel.json`, `main.js` and `styles.css` untouched. The new FAQ's answer text is byte-identical between the visible `<p>` and the schema entry.
+
+### Deliberately NOT done
+
+- **No new page created — fourth run running.** The purchase-intent cluster maps onto `machines` and `reseller`, which already exist and are strong. The one structural idea it suggested — city-level hardware pages, mirroring the aggregator's "UV Disinfection Robot in Brisbane" pattern — would mean building `machines`-variants per city that compete with the existing location pages for the same queries. Not worth splitting relevance for.
+- **No pricing added**, despite the category publishing ranges freely. Owner decision; see item 5.
+- **No lamp-degradation claim added** — it is a generic category figure, not a measurement of this unit.
+- **Did not surface equipment certifications on the industry pages.** Hypothesis tested and rejected — see above. Recorded so run 5 doesn't re-open it.
+- **Did not reconcile the room-duration figures.** Now worse than run 3 recorded; see item 8 below.
+- **`sitemap.xml` untouched** — no pages added or removed.
+- **No `BreadcrumbList`.** Settled in run 3 as not worth doing on a deliberately flat site. Not re-opened.
+
+### Needs owner input
+
+Items 1–7 and 9 all still stand with **no action taken** — GSC access, live-site confirmation, published reviews with attribution, a Google Business Profile, visible starting prices, a satisfaction guarantee, third-party accreditation (now narrowed, see above), and the HVAC operating-cost argument. See runs 1–3 for the reasoning.
+
+8. **Which room treatment time is correct? There are now three figures live, not two.** Run 3 recorded a conflict between the homepage and `bed-and-breakfasts`; checking the whole site this run found a third. The full inventory:
+
+   | Figure | Pages |
+   |---|---|
+   | **3–8 minutes** | `index` (twice, incl. FAQ schema) |
+   | **3–12 minutes** | `machines`, `reseller` |
+   | **12–15 minutes** | `australia`, `bed-and-breakfasts`, `caloundra`, `gold-coast` (incl. FAQ schema), `hotels`, `mould-treatment` (incl. FAQ schema), `noosa` |
+
+   Ten pages, three answers, on the single most-asked question about the service — and it is in FAQ schema on three of them, so it is what Google reads. 3–8 and 3–12 are at least compatible; 12–15 is not compatible with either. A prospective client who opens the homepage and then a service page sees the site contradict itself. **This is a one-line answer from the owner and the agent will align all ten pages and their schema in a single pass next run.** It will not guess, and it did not propagate any figure further this run.
+
+### Suggested next run
+
+1. **If the owner has answered item 8, do that first** — ten pages and three FAQ schema blocks, one pass.
+2. Fourth metadata tranche, 8 pages, worst first from the remaining 16 titles / 9 descriptions: `odour-elimination` (188-char description), `schools`, `offices`, `cinemas-and-venues`, `restaurants`, `veterinary`, `boats-and-marine`, `caravans-and-rvs`.
+3. Rotate keyword checks to the clusters listed above — the three never-sampled industry pages (`funeral-homes`, `places-of-worship`, `sports-clubs`) are the priority, since this run rewrote their metadata without ever having researched their clusters.
+4. Consider whether `reseller` needs the same objection-handling treatment `machines` just got. Its FAQ answers earnings, experience, territory, support, ROI and side-business fit, but nothing about what a reseller competes against locally.
+
+---
+
 ## 2026-08-30 — Run 3
 
 ### Researched

@@ -4,6 +4,79 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-09-20 — Run 6
+
+### Researched
+
+- **Keyword clusters sampled this run: the five that had never been sampled.** Real estate and property turnover (UV-C sanitisation for rentals, sales presentation, vacate cleans), offices Brisbane as its own cluster, boats/marine and caravans/RVs (cabin mould and sanitising, QLD), sports clubs and gyms, and salons/beauty as a standalone rather than paired cluster. Plus one "people also ask" cluster on whether UV light actually kills mould in a caravan or boat cabin, and one branded check.
+- **Checked over runs 1–6:** Noosa Heads, mould Noosa/Sunshine Coast, aged care Sunshine Coast, UV-C efficacy PAA (run 1); fleet Brisbane, bond-clean Sunshine Coast, Maroochydore, Caloundra, reseller Australia, mould-duration PAA, branded (run 2); Gold Coast hotels, HVAC Brisbane, childcare QLD, aged care Gold Coast, post-flood odour, two HVAC/odour PAA clusters (run 3); five purchase-intent clusters for the unit (run 4); six industry clusters and the materials PAA cluster (run 5); the five clusters above plus the caravan/boat mould PAA cluster and a branded check (run 6).
+- **The rotation has now covered every page on the site at least once.** Run 7 starts the second lap. The clusters worth re-checking first are the ones where something was found rather than the ones where nothing was: mould Sunshine Coast, fleet Brisbane, aged care, and the purchase-intent cluster for the unit.
+
+### Found
+
+- **Both standing blockers hold, for the sixth run.** The search tool is US-geolocated and does not reproduce an Australian searcher's local results, and `https://uvsterile.com.au` is still refused by this environment's egress proxy (`403` at the CONNECT tunnel). Ranking positions remain **unmeasured**, not measured-as-zero. A branded search for "UV Sterile Australia" / "uvsterile" returned nine competitors and not the site — which under a US-geolocated tool is close to meaningless for a Noosa business and should not be read as a ranking finding.
+- **No owner commits since run 3, now three runs running.** Items 8 and 11 — the room-duration and coach-duration conflicts — are unanswered and nothing was aligned. Both remain one-line answers that unlock a ten-page and a two-page fix respectively.
+- **The competitive picture held in all five new clusters, with one correction to how it should be described.** Brisbane offices returned *Zoom Office Cleaning* again (run 2's finding: a generalist listing UV-C among chemical, steam, electrostatic and ozone methods) plus fogging and pest-control operators. Gyms and sports clubs on the Sunshine Coast are held entirely by commercial cleaning companies — Signature, Divine, Ronnies, Sun Cleaning — whose copy covers change rooms, mats and equipment without a UV mention anywhere. Real estate returned no service competitor at all, only national UV equipment vendors. The accurate statement after six runs and twenty-three clusters is: **UV-C is a line item for a handful of large generalist cleaners, and nobody in South East Queensland is positioned as a UV specialist.** That is not the same as "no competitor offers UV", and the site should keep not implying it.
+- **The caravan/boat cluster is the emptiest one sampled so far, and the site was silent in it.** It is held by mobile detailers (Caravan Detailing Services, which covers Brisbane, Gold Coast and the Sunshine Coast) and by mould-gel and mould-prevention products. The only UV in the cluster is **water** sterilisers for RV plumbing — a different product answering a different question. No service anywhere in the results treats a cabin with UV-C. Acted on; see Changed.
+- **The mould PAA literature has a shape the site should not overstate, and doesn't.** Category sources report UV-C is effective on mould it directly reaches (one cited study, up to 90% growth reduction on exposed surfaces) and useless on mould behind linings or under dust, and they stress that without moisture control the problem returns. That is almost exactly the position `mould-treatment` already takes in its own words — "UV-C is a disinfection layer, not a moisture control solution" — so the two new FAQs were written to it rather than to the competitor framing.
+- **A business-model observation, recorded not acted on.** The detailers holding the caravan/boat cluster are mobile, already service Noosa to the Gold Coast, and already sell "sanitising and mould treatment" as a line item. That is the exact profile of the reseller program's target buyer. Whether that is a competitor or a distribution channel is an owner judgement, not an SEO change.
+
+#### Technical problems found in the repo
+
+1. **Seven titles were still over 60 characters** — the tail of the job begun in run 2. Fixed; the sitewide count is now zero over on both titles and descriptions.
+2. **Twenty-three pages still had no outbound contextual link**, and the industry pages still named no location anywhere in their body copy. Partly fixed — six pages this run, tranche 2 of a paced job.
+3. **`caravans-and-rvs` and `boats-and-marine` both name mould as their audience's number one problem and never said what UV-C does about it.** Neither linked to `mould-treatment` outside the nav. Fixed.
+4. **`machines` had no route to `reseller`** — it carries a Reseller testimonial and offered the reader no way to find out what that involves. Fixed. This was run 5's suggestion 5.
+
+### Changed
+
+Four commits, in priority order (fix broken → improve weak → add new):
+
+1. **`Trim the last seven over-length titles`** — `schools`, `offices`, `hotels`, `gyms-and-fitness`, `boats-and-marine`, `caravans-and-rvs`, `caloundra`. Each drops the third category term rather than the keyword ("Boats & Yachts" over "Boats, Yachts & Marine Vessels") and takes the shorter `| UV Sterile` suffix earlier tranches already use; `caloundra` instead matches the other location pages exactly. `og:title` updated in step. **Sitewide: 7 titles over 60 → 0, descriptions over 155 stay at 0. The metadata job begun in run 2 is finished.**
+2. **`Answer "do you come to us?" on six industry pages`** — internal linking tranche 2, on `aged-care`, `medical-clinics`, `hotels`, `offices`, `post-illness` and `rental-properties`. Unlike tranche 1 these needed a sentence written, because the industry pages never name a location in body copy. Every claim is lifted from the location pages rather than invented: Brisbane and Gold Coast are scheduled or next-day commercial work, the Gold Coast takes larger bookings and multi-property portfolios, interstate sites are quoted as unit supply with operator training. The `post-illness` answer says plainly that a single house outside the Sunshine Coast depends on what else is booked that week.
+3. **`Answer the mould question on the caravan and boat pages`** — one FAQ each, written to the position `mould-treatment` already holds: kills what the light reaches, adds no moisture, cannot reach behind a lining or into a wet bilge, and a van stored closed or a vessel left sealed will grow it again. Both now link to `mould-treatment` in copy.
+4. **`Give a machines buyer a route to the reseller program`** — one FAQ that also separates the two audiences: buy here to treat your own premises, go through the reseller program to treat other people's for a fee. The support it names is taken from the reseller page's own answers, including its qualifier that territory applies to operators committing to a region rather than to every buyer.
+
+**Why 12 pages and not more:** the linking job still has 18 pages without an outbound contextual link. Pacing it beats sweeping it, same reasoning as runs 2–5.
+
+### QA performed
+
+The harness rebuilt from scratch and run against all 41 pages after every change: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, open/close balance on 25 tag types, one `<h1>` per page, every JSON-LD block parsing as valid JSON, every FAQPage question **and answer** matching the page's visible text in order, every `Service`/`Product` entity carrying a name and url, every schema `url`/`image` resolving, canonical and `og:url` matching the page's own extensionless route, the og/twitter tag set, every internal href resolving with zero `.html`, `alt` and a resolving `src` on every `<img>`, title ≤ 60 and description ≤ 155 as hard failures, no duplicate titles or descriptions, ABN / phone / email present, FormSubmit endpoint and honeypot intact, and sitemap coverage in both directions.
+
+**All 41 pages pass with zero failures. 81 JSON-LD blocks parse.** One harness fix carried over from run 4: `index` wraps its FAQ questions in `<summary class="faq-q"><h4>` with a trailing `+` glyph, which the generic `<summary>` matcher trips on — handled in the matcher rather than by excluding the page, so the homepage's questions and answers are compared like every other page's.
+
+ABN 78 059 411 175 verified present and unchanged on all 41 pages. Phone occurrences went 209 → 211, both additions being the two copies (visible and schema) of the same new `post-illness` sentence, with the number byte-identical. Email unchanged at 175. FormSubmit endpoints and honeypot fields untouched. `vercel.json`, `main.js`, `styles.css` and `sitemap.xml` untouched — no pages added or removed. Every new FAQ answer is byte-identical between the visible `<p>` and its schema entry with links stripped, asserted by the edit script rather than checked by eye.
+
+### Deliberately NOT done
+
+- **No new page created — sixth run running.** The caravan/boat cluster was the closest thing to an opening found so far, and it is still served by pages that already exist (`caravans-and-rvs`, `boats-and-marine`, `mould-treatment`). What those pages lacked was the mould answer, not a new URL. A "caravan mould treatment" page would compete with `mould-treatment` for the same intent.
+- **Did not reconcile the room-duration figures (item 8) or the coach-duration conflict (item 11).** Owner-authored service facts, third run unanswered. Neither figure was propagated this run.
+- **Did not claim the field is free of UV competitors** anywhere, including in the new caravan and boat copy, despite that cluster returning no UV service at all.
+- **Did not complete the Twitter card tag set on 40 pages.** Settled in run 5: X falls back to the `og:` tags, which are present and correct everywhere.
+- **No pricing, payback figure or earnings claim added** to the new `machines` FAQ, though the question it answers invites all three. Owner item 5.
+- **Did not extend the materials/fade answer** to the seven pages still missing it. Item 10, unchanged.
+- **No `BreadcrumbList`.** Settled in run 3.
+
+### Needs owner input
+
+Items 1–7, 9 and 10 all still stand with **no action taken** — GSC access, live-site confirmation, published reviews with attribution, a Google Business Profile, visible starting prices, a satisfaction guarantee, third-party accreditation (GBAC being the concrete name run 5 attached to it), the HVAC operating-cost argument, and the materials/fade answer for venues and places of worship. See runs 1–5 for the reasoning.
+
+8. **Which room treatment time is correct? Three figures, now in its fourth run unanswered.** `index` says **3–8 minutes**, `machines` and `reseller` say **3–12**, and `australia`, `bed-and-breakfasts`, `caloundra`, `gold-coast`, `hotels`, `mould-treatment` and `noosa` say **12–15**, three of them inside FAQ schema. Ten pages, three answers, on the most-asked question about the service. **One line settles it and the agent will align all ten pages and their schema in a single pass the run after it arrives.**
+
+11. **Does a coach take 60 seconds or 3–4 minutes?** `coaches-and-buses` headlines "A full coach, clean in 60 seconds"; `fleet-vehicles` states "Coach: 3–4 minutes" in its copy and its FAQ schema. Both owner-authored, both live, fourfold apart, on the number the fleet pitch rests on.
+
+12. **New — are the mobile caravan and boat detailers a competitor or a distribution channel?** The operators holding that cluster are already mobile across Noosa to the Gold Coast and already sell mould treatment as a line item, which makes them the reseller program's target buyer on paper. Nothing was written to the site either way. If the answer is "channel", it changes what `reseller` and `cleaning-companies` should say about who the program is for.
+
+### Suggested next run
+
+1. **If the owner has answered items 8 and 11, do those first** — ten pages and three FAQ schema blocks for the room time, two pages for the coach time.
+2. **Internal linking, tranche 3.** 18 pages still have no outbound contextual link. The strongest remaining candidates are the industry pages that receive location links and give none back: `childcare`, `schools`, `restaurants`, `gyms-and-fitness`, `funeral-homes`, `veterinary`, `salons-and-beauty`, `cinemas-and-venues`, `places-of-worship`, `sports-clubs`.
+3. **Consider the reverse direction for the two pages the site sells hardest.** `reseller` has exactly one outbound contextual link (to `machines`) and `machines` now has two (`reseller`, `sunshine-coast`). Both are endpoints of the funnel with little pointing out of them — worth checking whether that is right or just unfinished.
+4. **Start the second lap of keyword rotation** with the clusters that returned something: mould Sunshine Coast, fleet Brisbane, aged care, purchase intent for the unit.
+5. **The metadata job is closed.** Do not re-open it without a reason; the next metadata work worth doing is rewriting descriptions for click-through, not for length, and that needs the ranking data the blockers currently prevent.
+
+---
+
 ## 2026-09-13 — Run 5
 
 ### Researched

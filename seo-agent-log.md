@@ -4,6 +4,82 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-09-27 — Run 7
+
+### Researched
+
+- **Second lap of the keyword rotation begins, starting with the clusters that returned something rather than nothing** (run 6's suggestion 4): mould treatment Sunshine Coast, fleet vehicle sanitisation Brisbane, UV-C disinfection in Queensland aged care, and purchase intent for the unit. Plus two "people also ask" clusters that looked like content gaps on paper — treatment frequency for childcare and schools, and whether UV-C kills parvovirus in a vet clinic.
+- **Checked over runs 1–7:** see run 6 for runs 1–6. Run 7 re-checked mould/Sunshine Coast, fleet/Brisbane, aged care/QLD and unit purchase intent, and added the frequency and parvovirus PAA clusters.
+- **Next lap should re-check:** Gold Coast hotels, childcare QLD, the reseller cluster, and the caravan/boat cluster — none re-checked since the run that first found them.
+
+### Found
+
+- **Both standing blockers hold, for the seventh run.** `https://uvsterile.com.au` is still refused by this environment's egress proxy (`403` at the CONNECT tunnel), so the live site cannot be read, and the search tool is US-geolocated so it does not reproduce what an Australian searcher sees. **Ranking positions remain unmeasured, not measured-as-zero.** Nothing in this log should be read as a ranking claim.
+- **No owner commits since 2026-08-25, now four runs running.** Items 8 and 11 — the room-duration conflict across ten pages and the coach-duration conflict across two — are unanswered for the fifth run. Neither figure was touched or propagated this run.
+- **Two apparent content gaps turned out to be already covered, and were dropped rather than written to.** The frequency cluster suggests weekly-to-fortnightly scheduling is what buyers search for; `childcare`, `gyms-and-fitness` and `offices` already answer it in their own words, and `mould-treatment` answers "how often should treatment be repeated?" directly. The parvovirus literature says UV-C achieves high reduction on directly exposed surfaces, is useless in shadow, and cannot replace chemical disinfection after organic soiling; `veterinary` already says almost exactly that, including the mechanical-removal caveat. **Writing either would have duplicated existing copy, so neither was written.** Recorded because a future run will rediscover these clusters and should not treat them as openings.
+- **The competitive picture is unchanged across four re-checked clusters.** Mould on the Sunshine Coast is held by remediation specialists competing on ULV misting, fogging and inspection reports (Electrodry, Mould Medico, MouldMen, Ever Ready, Beyond Clean) — none of them UV. Brisbane fleet work is held by detailers and chemical/ozone disinfection vendors (Rentokil via Custom Fleet, 1800 Dirty Cars, ISTOBAL ozone units). Aged care returns compliance guidance (the Aged Care IPC Guide, Queensland Health, the ARTG hospital-grade disinfectant requirement) and overseas UV vendors, not Australian UV services. Unit purchase intent returns Australian UV equipment distributors — Australian Ultra Violet, LAF tech, Ultra Violet Products — reselling Philips, sterilAir and Goldensea rather than competing as a service. **The run-6 formulation still holds and should keep being used: UV-C is a line item for a handful of large generalist cleaners, and nobody in South East Queensland is positioned as a UV specialist. That is not the same as "no competitor offers UV."**
+- **A recurring competitor trust signal worth naming precisely.** The mould remediation firms lead with things the site cannot claim for itself: Goldmorr-approved technicians, free inspection with a written report, and named accreditation. The aged-care cluster adds a harder one — the ARTG hospital-grade disinfectant listing, which is a chemical-product register and so does not apply to a light-based treatment at all. That asymmetry is an argument the site could make and currently does not. Owner item 7 territory; not acted on.
+
+#### Technical problems found in the repo
+
+1. **Fifteen pages had no outbound contextual link at all beyond the book CTA** — ten industry pages and four service pages, plus `about`. The ten industry pages additionally named no location anywhere in body copy. Fixed for all fourteen; see Changed.
+2. **`sitemap.xml` carried no `<lastmod>` on any of its 41 entries**, on a site that now changes most weeks, and each entry listed `priority` before `changefreq`, which does not validate against the sitemap XSD. Both fixed.
+3. **A styling trap that nearly shipped, and is the most useful thing in this entry for future runs.** The global rule on every page is `a { color: inherit; text-decoration: none; }`. The only rule that styles a link in body copy is `.faq details p a`, which the location pages introduced and runs 5–6 propagated. **A link placed anywhere else — a lede, a heading, a card paragraph — renders with no colour and no underline and is invisible to a reader.** A first draft of the service-page commit put links in one lede and two headings; it was reverted before commit once this was checked against the CSS. Every contextual link on the site now sits inside a FAQ answer paragraph, verified by offset rather than by eye. **Future runs: put contextual links in FAQ answers, or add the styling deliberately.**
+4. **Curly apostrophes.** The site used the straight form exclusively — zero `’` across all 41 pages. Nine new FAQ paragraphs were drafted with curly ones; caught before commit and normalised, in both the visible copy and the matching schema string so byte-identity held. Sitewide count is zero before and after.
+
+### Changed
+
+Three commits, in priority order (fix broken → improve weak → add new):
+
+1. **`Answer "where do you service?" on the last ten industry pages`** — internal linking tranche 3, and the end of the job begun in run 5. Nine new FAQs on `childcare`, `schools`, `restaurants`, `gyms-and-fitness`, `funeral-homes`, `veterinary`, `salons-and-beauty`, `cinemas-and-venues`, `places-of-worship`. Every geographic claim is lifted from the location pages: Coolum to Caloundra as the Sunshine Coast span, same- or next-day locally, Brisbane next-day or scheduled and mostly multi-site, the Gold Coast as commercial contract work, interstate sites quoted as unit supply per site with operator training. Page-specific detail from the same source — Maroochydore's hospital precinct on `veterinary`, Robina/Southport/Broadbeach on `salons-and-beauty`, Hastings Street and Noosaville kitchens on `restaurants`. **`sports-clubs` got no new words**: it already answered the question, so "Sunshine Coast" and "supply units" were simply wrapped as links and the JSON-LD string left verbatim.
+2. **`Link the four service pages to the services they overlap with`** — `odour-elimination`, `post-tenant`, `hvac-air-conditioning`, `real-estate`. These needed cross-references, not locations. One link-bearing FAQ each, plus three zero-word wraps (`fleet-vehicles`, `rental-properties`, `sunshine-coast`). `odour-elimination` now answers the musty-smell question as the reverse of the one run 3 answered on `water-damage` — which linked here and got nothing back. Every answer keeps the limits the site already states: UV-C treats what the light reaches, adds no moisture, will not dry a cavity or find a leak.
+3. **`Give sitemap.xml accurate lastmod dates and valid child order`** — each date read from that page's own last git commit rather than set by hand, so the field stays accurate; an inaccurate `lastmod` is worse than none. Children reordered to the XSD sequence.
+
+**Link graph before → after:** pages whose only body-copy link was the book CTA went **15 → 1**. The remaining one is `about`. `book` still has zero outbound, which is defensible for a conversion endpoint.
+
+### QA performed
+
+The harness was rebuilt from scratch again this run (it is not committed) and run against all 41 pages after every change: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, open/close balance on 25 tag types, one `<h1>` per page, every JSON-LD block parsing as valid JSON, every FAQPage question **and answer** matching the page's visible text, every `Service`/`Product` entity carrying a name and url, every schema `url`/`image` resolving, canonical and `og:url` matching the page's own extensionless route, the og tag set, every internal href resolving with zero `.html`, `alt` and a resolving `src` on every `<img>`, title ≤ 60 and description ≤ 155, no duplicate titles or descriptions, ABN / phone / email present, FormSubmit endpoint and honeypot intact, and sitemap coverage in both directions.
+
+**All 41 pages pass with zero failures. 81 JSON-LD blocks parse.** Schema FAQ count equals visible `<details>` count on all 14 edited pages. Every new answer is byte-identical between the visible `<p>` and its schema entry with links stripped, asserted by the edit script rather than checked by eye; where a wrapped sentence also appears in JSON-LD, the replacement was applied outside the `ld+json` regions and the schema copy asserted unchanged. `sitemap.xml` was validated by parsing it with an XML parser: 41 entries, every child sequence correct, every date well-formed, coverage correct in both directions.
+
+Note for future runs: the strict "schema answer must equal a bare `<p>`" check reports six mismatches on `index`, which are **not** defects — the homepage uses `<p class="faq-a">`, so the bare-`<p>` matcher misses it. The generic whole-document matcher passes on `index`.
+
+ABN 78 059 411 175 verified present and unchanged on all 41 pages, with no other ABN variant anywhere. Phone occurrences unchanged at **211** and email at **175** — the new copy adds neither, by design. No other phone number appears on the site. FormSubmit endpoints (4) and honeypot fields (86) untouched. `vercel.json`, `main.js`, `styles.css` and `robots.txt` verified byte-identical to run 6. No pages added or removed. No dollar figure, percentage, payback or guarantee wording appears anywhere in the diff.
+
+### Deliberately NOT done
+
+- **No new page created — seventh run running.** Nothing in four re-checked clusters and two PAA clusters pointed at a search opportunity an existing page does not already serve. The two apparent gaps were already answered on the site.
+- **Did not write the frequency or parvovirus answers**, having found both already covered. Duplicating existing copy would compete with it.
+- **Did not reconcile the room-duration figures (item 8) or the coach-duration conflict (item 11).** Owner-authored service facts, fifth run unanswered. Neither figure was propagated.
+- **Did not link the homepage's "Where do you service?" answer**, which names Noosa Heads, the Sunshine Coast, Maroochydore, Caloundra, Nambour, Mooloolaba, Brisbane, the Gold Coast and Australia, all unlinked. Two reasons: `index` uses `.faq-a` and has no rule styling links inside it, so it would need a new CSS rule; and `index` already links every location page from its locations grid, so the links would be duplicates. Low leverage, real cost.
+- **Did not claim the field is free of UV competitors** anywhere, despite four clusters returning no UV service.
+- **Did not make the ARTG argument** (that a hospital-grade disinfectant listing is a chemical-product register and cannot apply to a light-based treatment). It is a competitive positioning claim about a regulatory register, and it belongs to the owner. Recorded under item 7.
+- **No pricing, payback figure, earnings claim or guarantee added.** Owner items 5 and 6.
+- **Did not extend the materials/fade answer** to the seven pages still missing it. Item 10, unchanged.
+- **No `BreadcrumbList`.** Settled in run 3. **No Twitter card completion.** Settled in run 5.
+
+### Needs owner input
+
+Items 1–7, 9 and 10 all still stand with **no action taken** — GSC access, live-site confirmation, published reviews with attribution, a Google Business Profile, visible starting prices, a satisfaction guarantee, third-party accreditation, the HVAC operating-cost argument, and the materials/fade answer for venues and places of worship. See runs 1–5 for the reasoning. Item 12 (mobile caravan/boat detailers: competitor or reseller channel?) stands from run 6.
+
+8. **Which room treatment time is correct? Three figures, now in its fifth run unanswered.** `index` says **3–8 minutes**, `machines` and `reseller` say **3–12**, and `australia`, `bed-and-breakfasts`, `caloundra`, `gold-coast`, `hotels`, `mould-treatment` and `noosa` say **12–15**, three of them inside FAQ schema. Ten pages, three answers, on the most-asked question about the service. **One line settles it and the agent will align all ten pages and their schema in a single pass the run after it arrives.**
+
+11. **Does a coach take 60 seconds or 3–4 minutes?** `coaches-and-buses` headlines "A full coach, clean in 60 seconds"; `fleet-vehicles` states "Coach: 3–4 minutes" in its copy and its FAQ schema. Both owner-authored, both live, fourfold apart, on the number the fleet pitch rests on.
+
+13. **New — item 7 now has a specific, cheap form.** Competitors in the mould cluster lead with a **free inspection and written report**, not just accreditation. That is an offer, not a certification, so it may be the lowest-cost trust signal available to the business. Whether it is offered is an owner decision; if it is, it belongs on `mould-treatment` and `water-damage` and would change what those pages open with.
+
+### Suggested next run
+
+1. **If the owner has answered items 8 and 11, do those first** — ten pages and three FAQ schema blocks for the room time, two pages for the coach time. This is the fifth run it has been the top suggestion.
+2. **The internal linking job is done.** Do not re-open it as a sweep. The two open questions are narrow: whether `about` should carry an outbound link and earn any inbound ones (it currently has one outbound and none inbound in body copy), and whether `book` should stay a pure endpoint. Both are judgement calls, not defects.
+3. **The next real content work is depth on the pages that already rank-target well, not more breadth.** `mould-treatment` and `water-damage` are the two strongest topical pages and the two whose competitors publish the most. Compare their depth against Electrodry and Mould Medico specifically.
+4. **Continue the second lap** with the clusters not yet re-checked: Gold Coast hotels, childcare QLD, the reseller cluster, the caravan/boat cluster.
+5. **Read technical problem 3 above before writing any link.** It is the one repo-specific trap that is invisible in the HTML and only shows in the CSS.
+6. **Maintain `sitemap.xml` `lastmod`** whenever pages change — regenerate from git rather than editing by hand, or the field stops being accurate and stops being trusted.
+
+---
+
 ## 2026-09-20 — Run 6
 
 ### Researched

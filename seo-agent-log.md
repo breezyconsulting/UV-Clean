@@ -4,6 +4,12 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-10-16 — Owner-requested seasonal content (not an agent run)
+
+Four new pages published by the owner's request, ahead of the humid season: `summer-mould-sunshine-coast`, `summer-mould-brisbane`, `humid-summer-bacteria-guide`, `pre-summer-mould-checklist`. Each is an Article plus FAQPage page with a booking CTA, built from the `mould-treatment` template, and sitemap `lastmod` is 2026-10-16. All four are linked from every page's footer (a "Summer Guides" block in the Services column) and contextually from `mould-treatment`, `sunshine-coast` and `brisbane`. Claims stay inside the site's existing posture: UV-C deactivates spores and bacteria on surfaces it reaches, line of sight, no stain removal, moisture source must be fixed, room time 12-15 minutes as already stated on `mould-treatment`, no prices, guarantees or percentage kill claims. Future runs: do not treat these as orphan or thin pages, and re-check them against the same limits before editing.
+
+---
+
 ## 2026-10-11 — Run 9
 
 ### Researched

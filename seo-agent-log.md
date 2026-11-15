@@ -4,6 +4,141 @@ Reverse-chronological (newest first). One entry per weekly run. This file is the
 
 ---
 
+## 2026-11-15 — Run 14
+
+### Researched
+
+- **Network status: search works, fetching still does not — fourteenth run.** `WebFetch` on `uvsterile.com.au` failed with `getaddrinfo ENOTFOUND`. Per the tool's own advice, no further fetches were attempted this run. **The agent has still never read the live site or opened a single competitor page.** Owner item 16 stands.
+- **A capability no prior run used: a local browser.** Chromium and Playwright are pre-installed in this environment. The site is static HTML sitting in the repo, so pages can be rendered from `file://` and screenshotted **without any network access at all**. This run used it to confirm a real rendering defect, to check every link it added, and to measure colour contrast. **Run 15 should use it as a matter of course** — it removes the "needs a browser on a live site" blocker that has deferred work since run 3, including the font `@import` question.
+- **Rank checking is still impossible.** Search remains US-geolocated. Fourteen runs, no rank data.
+- **Clusters sampled this run:** `salons-and-beauty` (Queensland regulatory framework), `hvac-air-conditioning` (UV-C at the coil), `cleaning-companies` (subcontract/white-label market), and a full re-measure of the contextual link graph across all 45 pages.
+- **Not reached, carry to run 15:** `funeral-homes` and `places-of-worship` (run 8), `machines` and `reseller` buyer clusters (run 11), `offices`, `real-estate`, `cinemas-and-venues`, `coaches-and-buses`, `sports-clubs`, `bed-and-breakfasts`.
+
+### Found
+
+#### The main finding is a rendering defect, and it explains the link-graph weakness
+
+Run 13 flagged the near-orphaned industry pages as the clearest remaining structural weakness and queued the fix for this run. Attempting it surfaced **why** the weakness exists, which no prior run had noticed.
+
+The design system's base rule is `a { color: inherit; text-decoration: none; }`. The only selectors that restyle an inline link are **`.faq details p a`** (41 pages) and **`.article p a`** (the 4 guide pages). A link placed anywhere else in body prose — a `.tech-card p`, a `.lede`, a `.body p` — inherits the base rule and **renders as ordinary body text: same colour, no underline, no affordance of any kind.**
+
+That is not theoretical. **Five existing links were already in that state:**
+
+- `mould-treatment` — three links in one sentence, to both summer mould guides and the pre-summer checklist
+- `brisbane` — the summer mould guide link
+- `sunshine-coast` — the summer mould guide link
+
+Rendered locally in Chromium and read back the computed style: `color: rgba(11, 14, 26, 0.65)` (the muted body colour) and `text-decoration: none` — **identical to the surrounding sentence.** A screenshot confirmed it: a reader has no way to tell those words are clickable. These are links from strong pages into the seasonal guide content, and they have been invisible to every human visitor for as long as they have existed.
+
+**This also explains the link graph.** The industry pages are not under-linked because of an oversight in the copy — they are under-linked because almost every phrase that could carry a link sits in tile or section prose where a link would be invisible. Prior runs correctly put all contextual links inside FAQ answers; that is the only place the style reaches.
+
+**The fix needed no new CSS.** `index.html` already handles this exact case with an inline style attribute: `color: var(--uv); text-decoration: underline; text-underline-offset: 3px;`. Reusing that pattern means no new selector, no design-system change, and no risk to anything outside the edited element.
+
+#### Link graph, re-measured
+
+Confirmed run 13's numbers from a clean rebuild: stripping nav and footer, **14 pages had exactly one contextual inbound link and in every case it was the home page.** `index` 0 in / 37 out; `book` 44 in / 0 out; `sunshine-coast` the strongest hub at 24 in; `noosa` 11, `brisbane` 18, `gold-coast` 16.
+
+**After this run: pages with a single contextual inbound link drop from 14 to 6.**
+
+#### Cluster research
+
+- **`salons-and-beauty` has a real Queensland framework, and the page already answers the question that matters.** Two independent searches agree: hairdressing, beauty therapy and skin penetration fall under a Queensland public health Act; higher-risk (skin-penetration) services are licensed with the local council while non-higher-risk operators still carry infection-control obligations; Queensland Health publishes infection control guidelines for the sector; and **local councils enforce it through environmental health officers.** Reprocessing of reusable instruments is handled separately. **Nothing shipped**: the page's existing answer *"Does UV-C work on autoclavable tools that we already sterilise?"* already draws the important line — UV-C is for non-autoclavable items and surfaces, not a replacement for the sterilisation pathway. A regulatory answer on top of that would restate the same boundary in a fifth variation. See Deliberately NOT done.
+- **`hvac-air-conditioning`: the UV-C-at-the-coil evidence is vendor-only and self-contradictory.** One Australian supplier claims UV-C is a proven alternative to chemical coil cleaning and cites a distribution centre that had been cleaning coils every two months before fitting it; more cautious sources say UV should sit alongside filtration rather than replace it, and that mould still grows in corners the light does not reach. **No Australian standard, no independent field trial and no industry-body guidance surfaced.** Not shippable on this sourcing.
+- **`cleaning-companies`: no evidence of a subcontract or white-label market in Australia.** Searches found cleaners *adding* UV-C between manual cleans, equipment makers (Signify) selling a direct service model, and an Australian manufacturer (UV-Guard) — but nothing on subcontracting UV work to a specialist. This supports the positioning `reseller` already takes.
+- **Competitor observations (cannot act on, recording them):**
+  - **Still no direct service competitor on the Sunshine Coast.** A search for the head term returned a local fogging-based cleaner, national hygiene firms (Initial), aircon cleaners (Sanitair), and a Queensland Health **hospital** UV robot trial at Princess Alexandra — but no one selling portable UV-C treatment as a booked service. Consistent with runs 1–13.
+  - The recurring competitor framing, from a Sydney cleaning company's guide, is that **UV-C supplements but does not replace traditional cleaning**. The site already says this on several pages, which is the honest position and also the one the market expects.
+
+#### Technical findings in the repo
+
+1. **Zero failures and zero warnings across all 45 pages, before and after** — once the harness itself was correct. The first rebuild this run reported 56 failures; **all 56 were harness bugs, not site defects**, and they are worth recording so run 15 does not repeat them:
+   - `s.count('<head')` also matches **`<header`**. Use `<head\b`.
+   - Stripping tags by replacing them with a **space** breaks word adjacency, so every FAQ answer containing a link failed the "schema answer appears in visible text" check. Replace tags with the **empty string** instead — the site's convention wraps contiguous words, so this is correct and only risks false positives, never false negatives.
+   - `index` writes its FAQ as `<details class="faq-item">`, so an exact `<details>` match counts zero. Use `<details\b`.
+   - Run 13's home-page sitemap artifact did **not** recur; that fix held.
+2. **Verified the baseline independently.** The corrected harness was run against the **stashed, unmodified tree** as well as the changed one. Both: 45 pages, zero failures, zero warnings. The clean result is the site's, not an artifact of checking after the fact.
+3. **The diff is provably nothing but `<a>` tags.** Every added line was compared against its removed line with only `<a ...>` and `</a>` removed: **10 added, 10 removed, prose byte-identical.** No word of copy was altered on any page.
+
+### Changed
+
+Three commits. **10 insertions, 10 deletions across 8 pages**, plus 8 sitemap dates. Every one of the 10 changed lines is the same line with an anchor tag added.
+
+1. **`Make the guide links on mould-treatment and brisbane visible`** — the five invisible links described above, fixed with the inline-style pattern `index.html` already uses. **Highest-priority change of the run**: it is the only one fixing something measurably broken, and it was verified in a browser before and after. Measured contrast after the change is **4.97:1, passing WCAG AA**.
+2. **`Link the location and about pages through to the orphaned industry pages`** — eight contextual links, each anchoring words already present in the copy:
+
+   | from | anchor (existing words) | to |
+   |---|---|---|
+   | `noosa` | day spas | `salons-and-beauty` |
+   | `noosa` | boats | `boats-and-marine` |
+   | `noosa` | caravans | `caravans-and-rvs` |
+   | `sunshine-coast` | gyms | `gyms-and-fitness` |
+   | `maroochydore` | restaurants | `restaurants` |
+   | `about` | Veterinary clinics | `veterinary` |
+   | `coaches-and-buses` | school transport | `schools` |
+   | `reseller` | general commercial cleaners | `cleaning-companies` |
+
+   Seven of the eight targets had **only the home page** linking to them. The `reseller` link sits inside an FAQ answer, so it is styled by the existing `.faq details p a` rule and correctly carries **no** inline style; its schema answer text is unchanged and still matches the visible text once tags are stripped.
+3. **`Move sitemap lastmod for the eight pages whose links changed`** — only those eight move to 2026-11-15; the other 37 keep their real dates. Same rule as runs 8–13, read as "pages that actually changed".
+
+### QA performed
+
+The harness was rebuilt from scratch, **corrected against the stashed baseline** (see technical finding 1), and run before the edits, after the edits, and after the sitemap change. Checks: `<!DOCTYPE html>` first, exactly one `<html>`/`<head>`/`<body>`, exactly one `<h1>`, open/close balance across all tag types with void elements excluded, every JSON-LD block parsing, `Service`/`Product`/`LocalBusiness`/`Organization` carrying a name, every `FAQPage` question **and answer** present in visible text, schema FAQ count equal to visible `<details>` count, every schema url/image/`@id`/logo free of `.html`, canonical and `og:url` present, extensionless and **matching the page's own filename**, all five `og:` tags present, `og:image` resolving to a real file, every internal `href` resolving, every `<img>` carrying `alt`, phone/email/ABN on every page, title and description measured after HTML-unescaping, no duplicate title or description across any two pages, and `sitemap.xml` parsing with one `<loc>` per page, no `.html`, no duplicate `<loc>`, no future `lastmod` and no page missing.
+
+**All 45 pages pass with zero failures and zero warnings, on the unmodified baseline and after every change.**
+
+Additional checks specific to this run:
+
+- **Browser verification of all 10 links.** Each was rendered from `file://` in Chromium and its **computed** colour and `text-decoration` read back: all 10 return `rgb(107, 63, 255)` (`--uv`) and `underline`. Screenshots of the noosa tile grid, the coaches hero lede and the mould-treatment paragraph were reviewed — the links read naturally and in-brand.
+- **Contrast measured, not assumed.** Each link's computed colour was compared against its nearest non-transparent ancestor background: **4.97:1 on all ten, passing WCAG AA.**
+- **Prose identity asserted.** 10 added lines vs 10 removed lines, identical once only `<a>` tags are removed.
+- **Per-page integrity counts unchanged**, asserted file by file against `HEAD`: phone, email, ABN, `gtag`, `_honey`, `FormSubmit`, `formsubmit.co`, `<form>`/`</form>`, `application/ld+json` block count and `<details` count.
+- **Added lines scanned** for dollar signs, price, pricing, guarantee, refund, warranty, payback, discount, "certified to", the ABN, the phone number, the email, `.html`, any percentage, "penetrat" and any digits-plus-unit: **zero matches on all of them.** No figure of any kind was added.
+- `vercel.json`, `main.js`, `styles.css`, `robots.txt` and `site.webmanifest` confirmed untouched by direct `git diff`.
+
+**Git note:** unlike run 13, this session started attached to `main` at `origin/main` with a clean tree. Pushed `e4a9b4b..6c7441e`.
+
+### Deliberately NOT done
+
+- **Did not add `fleet-vehicles` → `coaches-and-buses`**, though it is the most obvious missing link on the site and `coaches-and-buses` still has only the home page linking to it. The sole natural anchor is the **"Coach: 3–4 minutes"** line — and the target page headlines **"A full coach, clean in 60 seconds."** Linking them would put the two conflicting figures one click apart and make the contradiction easy for a prospect to find. **Blocked on owner item 11.** It becomes a free win the moment that number is settled.
+- **Did not add a new CSS rule** such as `.tech-card p a` or `.body p a`, though it would be tidier than repeating an inline style. A new selector silently restyles every future link in that context and is a design-system change on a live site; the inline pattern already in `index.html` is the established precedent and affects only the element it is on.
+- **Did not touch the tile and section prose on `gold-coast`, `caloundra` or `brisbane`** beyond the one fix. Good anchors exist there (`fleet operators`, `aged care`, `Hotels`), but their targets already have three or more contextual inbound links. Spending the run's link budget on pages that were not orphaned would be padding.
+- **Did not write a `salons-and-beauty` regulatory answer**, despite the research being solid and two-source-verified. The page's existing autoclave answer already draws the line that matters, and a fifth page-level variation of "this does not replace your existing obligation" is repetition, not coverage. Run 13 warned specifically against copying a conclusion across clusters.
+- **Did not edit the `salons-and-beauty` compliance strip**, which claims treatment "supports compliance with NSW/QLD Skin Penetration Regulations" and that treatment logs are "suitable for council inspection and licensing renewal". That is owner copy making a compliance claim, and whether a council accepts such a log is a matter of fact the agent cannot verify. **New owner item 23.**
+- **Did not write an HVAC answer.** Vendor-only sourcing, and the vendors contradict each other on the one question that matters.
+- **Did not cite a regulation number, clause, version or guideline edition** anywhere. Run 11's rule, fourth run holding — and the reason the salon research stayed in this log rather than going on the page.
+- **Did not reconcile the room treatment time (item 8), now in its twelfth run.** Still eleven pages to three.
+- **Did not touch the coach-duration conflict (item 11), the location-page naming question (item 15), the two pest claims (item 17), the `offices` treatment log (item 18), the gyms "penetrates" wording (item 19) or the unit coverage figure (item 20).** Tenth, seventh, sixth, fifth, fifth and fourth run unanswered. All are owner calls on real business facts, or edits to owner copy on live pages.
+- **Did not rewrite any title or meta description.** All 45 unique and within length; without rank or CTR data this is speculative churn.
+- **No new page created — fourteenth run running.** No cluster sampled produced a search opportunity an existing page does not already serve.
+- **Did not convert the font `@import` to `<link rel="stylesheet">`.** Deferred since run 3 for want of a browser — but **that blocker is now gone** (see Researched). Queued properly for run 15.
+- **Did not add `BreadcrumbList`** (settled run 3), complete Twitter cards (settled run 5), add `sameAs` (owner item 4), give the location pages an `@id` (blocked on item 15), or add a `FAQPage` to `about` (settled run 8).
+- **No pricing, guarantee, inspection offer, payback figure or earnings claim added.** Owner items 5, 6, 13 and 14.
+
+### Needs owner input
+
+Items 2, 3, 7, 9, 10, 12, 13 and 14 all stand with **no action taken** — live-site confirmation, published reviews with attribution, a Google Business Profile, third-party accreditation, the HVAC operating-cost argument, the materials/fade answer, whether the caravan and boat detailers are competitor or channel, the credited inspection offer Electrodry runs, and Electrodry's published mould guarantee. See runs 1–13.
+
+1. **Google Search Console access — still the single highest-value item on this list.** Search works but is US-geolocated, so **the agent still cannot see where any page ranks in Australia**, and no run ever has. GSC would give actual queries, impressions, positions and click-through per page. **Fourteen runs of content and structural work have now gone in with no feedback loop at all.**
+
+5. **Visible starting prices**, and **6. a satisfaction guarantee on treatments** — unchanged, see runs 1–3.
+
+8. **Which room treatment time is correct? Twelfth run unanswered.** Eleven pages say 12–15 minutes or a 12-minute cycle; `index` says 3–8 and `machines` and `reseller` say 3–12. **One word from you and the agent aligns the three outliers and their schema in a single pass next run.**
+
+11. **Does a coach take 60 seconds or 3–4 minutes? Tenth run.** `coaches-and-buses` headlines "A full coach, clean in 60 seconds"; `fleet-vehicles` states "Coach: 3–4 minutes" in copy and in FAQ schema. **This now blocks a concrete improvement**, not just tidiness — see Deliberately NOT done. It is the cheapest item on this list to answer.
+
+15. **Should the seven location pages name the business "UV Sterile Australia — Noosa Heads" and so on?** One base, one ABN, one phone number, so it is one entity with service areas. Settling it unlocks the `@id` consolidation those pages still lack.
+
+23. **New — does a council actually accept a UV treatment log for a personal-appearance-services inspection?** `salons-and-beauty` tells salons the logs are "suitable for council inspection and licensing renewal". Queensland enforces this sector through local-council environmental health officers, so whether a log is accepted is a real-world fact only you can confirm. If it is confirmed, it is a strong differentiator worth stating more prominently; if it is not, the wording should soften.
+
+### Suggested next run
+
+1. **Use the local browser.** It works offline against the repo. Settle the font `@import` question deferred since run 3, and screenshot each page at phone width to look for layout problems no run has ever been able to see.
+2. **Audit for the inverse of this run's defect** — any remaining in-prose link outside a FAQ or an article page. This run fixed the five that existed; the browser makes a sitewide computed-style sweep cheap, and it should become a standing harness check.
+3. Continue the link build-out to the six pages still on a single inbound link: `bed-and-breakfasts`, `cinemas-and-venues`, `coaches-and-buses`, `funeral-homes`, `places-of-worship`, `sports-clubs`. Several have no natural anchor anywhere on the site, so this may mean one FAQ answer written to earn its link rather than a tag added to existing words.
+4. Rotate keyword checks to the untouched clusters listed above.
+
+---
+
 ## 2026-11-08 — Run 13
 
 ### Researched
